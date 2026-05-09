@@ -1,6 +1,6 @@
 [package]
 name = "esp-nvs-partition-tool"
-version = "0.1.0"
+version = "0.5.0"
 edition = "2024"
 rust-version = "1.87"
 authors = ["Lars Hemala", "Nicholas Loubser"]
@@ -27,7 +27,7 @@ cli = ["dep:clap"]
 base64 = "0.22.1"
 clap = { version = "4.5.60", features = ["derive"], optional = true }
 csv = "1.4.0"
-esp-nvs = { version = "0.4.0" }
+esp-nvs = { version = "0.5.0", path = "../esp-nvs" }
 hex = "0.4.3"
 serde = { version = "1.0.228", features = ["derive"] }
 thiserror = "2.0.18"
