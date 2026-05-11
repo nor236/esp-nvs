@@ -7,17 +7,16 @@
 )]
 #![deny(clippy::large_stack_frames)]
 
-use esp_hal::{
-    clock::CpuClock,
-    main,
-    time::{Duration, Instant},
-};
-
-use log::info;
-
-use esp_backtrace as _;
-
 extern crate alloc;
+use esp_backtrace as _;
+use esp_hal::clock::CpuClock;
+use esp_hal::main;
+use esp_hal::time::{
+    Duration,
+    Instant,
+};
+use esp_nvs::Key;
+use log::info;
 
 // This creates a default app-descriptor required by the esp-idf bootloader.
 // For more information see: <https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-reference/system/app_image_format.html#application-description>
@@ -67,7 +66,8 @@ cfg_if::cfg_if! {
 #[main]
 fn main() -> ! {
     // generator version: 1.3.0
-    // generator parameters: --chip esp32c61 -o esp32c61-wroom-1 -o unstable-hal -o alloc -o log -o esp-backtrace -o vscode
+    // generator parameters: --chip esp32c61 -o esp32c61-wroom-1 -o unstable-hal -o alloc -o log -o
+    // esp-backtrace -o vscode
 
     esp_println::logger::init_logger_from_env();
 
@@ -77,8 +77,12 @@ fn main() -> ! {
 
     let storage = esp_storage::FlashStorage::new(peripherals.FLASH);
 
-    let nvs = esp_nvs::Nvs::new(PARTITION_OFFSET, PARTITION_SIZE, storage)
-        .expect("failed to create nvs");
+    let mut nvs = esp_nvs::Nvs::new(PARTITION_OFFSET, PARTITION_SIZE, storage).expect("failed to create nvs");
+    let namespace = &Key::from_str("test");
+    let key_str = &Key::from_str("world");
+    nvs.set(namespace, key_str, "123");
+    let value: alloc::string::String = nvs.get(namespace, key_str).unwrap_or_default();
+    nvs.delete(namespace, key_str);
 
     loop {
         info!("Hello world!");

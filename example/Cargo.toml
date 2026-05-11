@@ -7,6 +7,9 @@ version = "0.1.0"
 [[bin]]
 name = "example"
 path = "./src/bin/main.rs"
+test = false
+bench = false
+harness = false
 
 [features]
 default = ["esp32c3"]
