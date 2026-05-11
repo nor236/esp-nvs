@@ -1,0 +1,56 @@
+[target.'cfg(target_arch = "riscv32")']
+runner    = "espflash flash --monitor"
+rustflags = [
+    "-C", "link-arg=-Tlinkall.x",
+    "-C", "force-frame-pointers",
+]
+
+[target.'cfg(target_arch = "xtensa")']
+runner    = "espflash flash --monitor"
+rustflags = [
+    # GNU LD
+    "-C", "link-arg=-Wl,-Tlinkall.x",
+    "-C", "link-arg=-nostartfiles",
+
+    # LLD
+    # "-C", "link-arg=-Tlinkall.x",
+    # "-C", "linker=rust-lld",
+]
+
+
+[env]
+ESP_LOG = "info"
+
+[build]
+rustflags = [
+    # Required to obtain backtraces (e.g. when using the "esp-backtrace" crate.)
+    # NOTE: May negatively impact performance of produced code
+    "-C", "force-frame-pointers",
+]
+
+[unstable]
+build-std = ["alloc", "core"]
+
+
+[alias]
+
+check-esp32    = "check --no-default-features --features esp32    --target xtensa-esp32-none-elf"
+check-esp32s2  = "check --no-default-features --features esp32s2  --target xtensa-esp32s2-none-elf"
+check-esp32s3  = "check --no-default-features --features esp32s3  --target xtensa-esp32s3-none-elf"
+check-esp32c2  = "check --no-default-features --features esp32c2  --target riscv32imc-unknown-none-elf"
+check-esp32c3  = "check --no-default-features --features esp32c3  --target riscv32imc-unknown-none-elf"
+check-esp32c5  = "check --no-default-features --features esp32c5  --target riscv32imac-unknown-none-elf"
+check-esp32c6  = "check --no-default-features --features esp32c6  --target riscv32imac-unknown-none-elf"
+check-esp32c61 = "check --no-default-features --features esp32c61 --target riscv32imac-unknown-none-elf"
+check-esp32h2  = "check --no-default-features --features esp32h2  --target riscv32imac-unknown-none-elf"
+
+build-esp32    = "build  --no-default-features --features esp32    --target xtensa-esp32-none-elf"
+build-esp32s2  = "build  --no-default-features --features esp32s2  --target xtensa-esp32s2-none-elf"
+build-esp32s3  = "build  --no-default-features --features esp32s3  --target xtensa-esp32s3-none-elf"
+build-esp32c2  = "build  --no-default-features --features esp32c2  --target riscv32imc-unknown-none-elf"
+build-esp32c3  = "build  --no-default-features --features esp32c3  --target riscv32imc-unknown-none-elf"
+build-esp32c5  = "build  --no-default-features --features esp32c5  --target riscv32imac-unknown-none-elf"
+build-esp32c6  = "build  --no-default-features --features esp32c6  --target riscv32imac-unknown-none-elf"
+build-esp32c61 = "build  --no-default-features --features esp32c61 --target riscv32imac-unknown-none-elf"
+build-esp32h2  = "build  --no-default-features --features esp32h2  --target riscv32imac-unknown-none-elf"
+

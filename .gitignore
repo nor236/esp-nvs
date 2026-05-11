@@ -12,3 +12,12 @@ devenv.local.nix
 
 # pre-commit
 .pre-commit-config.yaml
+.claude/
+*/.clippy.toml
+*/.claude/
+target/
+.nix/
+.vscode/
+*/.sisyphus/
+
+Cargo.lock

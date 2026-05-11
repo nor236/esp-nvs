@@ -1,5 +1,6 @@
 mod nvs 'esp-nvs/justfile'
 mod partition_tool 'esp-nvs-partition-tool/justfile'
+mod example 'example/justfile'
 
 _default:
     @just --list
