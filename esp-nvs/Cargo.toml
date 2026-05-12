@@ -78,3 +78,20 @@ thiserror = { version = "2.0.0", default-features = false }
 
 [dev-dependencies]
 pretty_assertions = "1.4.1"
+
+
+# ─── Profiles (must be at workspace root) ──────────────────────────────
+[profile.dev.package.esp-storage]
+opt-level = 3
+
+[profile.dev]
+# The default debug profile (opt-level=0) is too slow and too big for
+# resource-constrained devices, and esp-storage requires opt-level >= 2
+# on Xtensa targets. Always build with optimizations enabled.
+opt-level = 2
+
+[profile.release]
+codegen-units = 1
+debug = 2
+lto = 'fat'
+opt-level = 2
