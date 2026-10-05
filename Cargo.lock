@@ -822,7 +822,7 @@ checksum = "911aadae41ec99104efa865bd0b6e486b4b735999f9b571963748a46d16495ab"
 
 [[package]]
 name = "esp-nvs"
-version = "0.5.0"
+version = "0.6.0"
 dependencies = [
  "defmt",
  "embedded-storage",
@@ -835,7 +835,7 @@ dependencies = [
 
 [[package]]
 name = "esp-nvs-partition-tool"
-version = "0.5.0"
+version = "0.6.0"
 dependencies = [
  "base64",
  "clap",

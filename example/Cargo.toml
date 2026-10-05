@@ -118,7 +118,7 @@ esp-println = { version = "0.18.0", features = [
     "log-04",
 ] }
 esp-storage = { version = "0.10.0"  }
-esp-nvs = { version = "0.5.0", path = "../esp-nvs", default-features = false }
+esp-nvs = { version = "0.6.0", path = "../esp-nvs", default-features = false }
 
 # For fine tuning these settings, please refer to https://doc.rust-lang.org/cargo/reference/profiles.html
 [profile.dev]

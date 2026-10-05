@@ -17,16 +17,16 @@ _CHIP_TARGET := {
 # Build the example for a specific chip.
 # Usage: just build esp32c6
 build chip="esp32c61":
-    cargo build -p example --features {{chip}} --target {{ _CHIP_TARGET[chip] }}
+    cargo build -p example --no-default-features --features {{chip}} --target {{ _CHIP_TARGET[chip] }}
 
 # Build + flash (via espflash runner) for a specific chip.
 # Usage: just run esp32c3
 run chip="esp32c61":
-    cargo run -p example --features {{chip}} --target {{ _CHIP_TARGET[chip] }}
+    cargo run -p example --no-default-features --features {{chip}} --target {{ _CHIP_TARGET[chip] }}
 
 # Build release for a specific chip.
 build-release chip="esp32c61":
-    cargo build -p example --release --features {{chip}} --target {{ _CHIP_TARGET[chip] }}
+    cargo build -p example --release --no-default-features --features {{chip}} --target {{ _CHIP_TARGET[chip] }}
 
 # List supported chips and their targets.
 list-chips:
