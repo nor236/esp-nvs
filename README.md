@@ -33,7 +33,7 @@ When using `esp_storage::FlashStorage`, enable the matching chip feature on **bo
 Example implementation of the Platform driver for an ESP32. This requires the `embedded-storage` feature of the `esp-storage` crate:
 ```toml
 [dependencies]
-esp-nvs     = { version = "0.5.0", features = ["esp32c6"] }
+esp-nvs     = { version = "0.6.0", features = ["esp32c6"] }
 esp-storage = { version = "0.10.0", features = ["esp32c6", "embedded-storage"] }
 ```
 

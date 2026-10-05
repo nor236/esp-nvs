@@ -27,7 +27,7 @@ update-changelog: nvs::update-changelog partition_tool::update-changelog
 bump-lib version:
     git-cliff --unreleased --tag {{version}} --include-path "esp-nvs/**" --prepend esp-nvs/CHANGELOG.md
     sed -i '0,/^version = ".*"/s//version = "{{version}}"/' esp-nvs/Cargo.toml
-    sed -i 's|esp-nvs = { version = "[^"]*"|esp-nvs = { version = "{{version}}"|' esp-nvs-partition-tool/Cargo.toml example/Cargo.toml
+    sed -i -E 's|(esp-nvs *= *\{ *version *= *")[^"]*"|\1{{version}}"|' esp-nvs-partition-tool/Cargo.toml example/Cargo.toml README.md
     cargo check -p esp-nvs -p esp-nvs-partition-tool
 
 # Bump the esp-nvs-partition-tool: prepend changelog, set version, refresh lock.
