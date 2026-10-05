@@ -23,6 +23,18 @@ test:
 
 update-changelog: nvs::update-changelog partition_tool::update-changelog
 
+# Bump the esp-nvs library: prepend changelog, set version, refresh lock.
+bump-lib version:
+    git-cliff --unreleased --tag {{version}} --include-path "esp-nvs/**" --prepend esp-nvs/CHANGELOG.md
+    sed -i '0,/^version = ".*"/s//version = "{{version}}"/' esp-nvs/Cargo.toml
+    cargo check -p esp-nvs
+
+# Bump the esp-nvs-partition-tool: prepend changelog, set version, refresh lock.
+bump-tool version:
+    git-cliff --unreleased --tag {{version}} --include-path "esp-nvs-partition-tool/**" --prepend esp-nvs-partition-tool/CHANGELOG.md
+    sed -i '0,/^version = ".*"/s//version = "{{version}}"/' esp-nvs-partition-tool/Cargo.toml
+    cargo check -p esp-nvs-partition-tool
+
 _nightly-fmt:
     devenv shell \
         --option languages.rust.version:string 2026-02-18 \

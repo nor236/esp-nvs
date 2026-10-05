@@ -24,14 +24,21 @@ This library is used in production, but nevertheless, there might be some kinks 
 
 ## Example
 
-esp-nvs requires an implementation of the `Platform` trait to provide access to the flash as well as to the CRC32 present
-in the ESP32 ROM.
+esp-nvs requires an implementation of the `Platform` trait to provide access to flash storage and CRC32 (typically the
+ESP32 ROM CRC32 peripheral).
+
+When using `esp_storage::FlashStorage`, enable the matching chip feature on **both** `esp-storage` and `esp-nvs`. The
+`esp-nvs` chip feature activates the `Crc` trait implementation for `FlashStorage` using the ROM CRC32 peripheral:
 
 Example implementation of the Platform driver for an ESP32. This requires the `embedded-storage` feature of the `esp-storage` crate:
 ```toml
 [dependencies]
+esp-nvs     = { version = "0.5.0", features = ["esp32c6"] }
 esp-storage = { version = "0.10.0", features = ["esp32c6", "embedded-storage"] }
 ```
+
+If you prefer a pure software CRC32 (no ROM dependency), provide your own `impl Crc for FlashStorage<'_>` using
+`esp_nvs::platform::software_crc32`.
 
 ```rust,ignore
 // TODO: Update the offsets according to your partition table definition.
@@ -40,6 +47,6 @@ let partition_size = 0x32000;
 
 let storage = esp_storage::FlashStorage::new(peripherals.FLASH);
 
-let nvs =
+let mut nvs =
     esp_nvs::Nvs::new(partition_offset, partition_size, storage).expect("failed to create nvs");
 ```
