@@ -24,15 +24,15 @@ default = ["cli"]
 cli = ["dep:clap"]
 
 [dependencies]
-base64 = "0.22.1"
-clap = { version = "4.5.60", features = ["derive"], optional = true }
+base64 = "0.23.1"
+clap = { version = "4.6.7", features = ["derive"], optional = true }
 csv = "1.4.0"
 esp-nvs = { version = "0.5.0", path = "../esp-nvs" }
 hex = "0.4.3"
-serde = { version = "1.0.228", features = ["derive"] }
-thiserror = "2.0.18"
+serde = { version = "1.0.229", features = ["derive"] }
+thiserror = "2.0.21"
 
 
 [dev-dependencies]
-similar = "2"
-tempfile = "3.25.0"
+similar = "3.2.0"
+tempfile = "3.27.0"
