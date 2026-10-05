@@ -27,7 +27,7 @@ Rust workspace: ESP-IDF compatible NVS (Non-Volatile Storage) library + partitio
 
 `esp-nvs` requires a chip feature. Supported: `esp32`, `esp32s2`, `esp32s3`, `esp32c2`, `esp32c3`, `esp32c5`, `esp32c6`, `esp32c61`, `esp32h2`.
 
-Feature gates: `esp-storage`, `esp-hal`, `esp-sync`, `esp-rom-sys` (all optional with chip features).
+Feature gates: `esp-storage`, `esp-hal`, `esp-sync`, `esp-rom-sys` (all optional with chip features). Each chip feature also enables `esp-storage/embedded-storage`, which is required for `Platform: NorFlash`.
 Target arch: `riscv32` chips use `riscv` crate; `xtensa` chips use `xtensa-lx` crate.
 Example: `cargo test --features esp32c6` fails because tests run on x86_64. Host tests use `MemFlash` with no chip feature.
 
@@ -105,7 +105,7 @@ Located at `esp-nvs-partition-tool/tests/assets/`. Roundtrip tests parse CSV →
 ### Dev Environment (Nix + devenv + direnv)
 
 - `.envrc` loads `devenv` (direnv-based)
-- `devenv.nix` provides: Rust `1.93.1` stable, `just`, `nixfmt`, `cargo-edit`, `actionlint`, `esp-nvs-partition-tool` via overlay
+- `devenv.nix` provides: Rust `1.95.0` stable, `just`, `nixfmt`, `cargo-edit`, `actionlint`, `esp-nvs-partition-tool` via overlay
 - Targets installed: `x86_64-unknown-linux-gnu`, `riscv32imac-unknown-none-elf`, `riscv32imc-unknown-none-elf`
 - Cross-target for xtensa uses separate `xtensa-toolchain` action in CI
 

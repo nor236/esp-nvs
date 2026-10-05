@@ -27,10 +27,10 @@ This library is used in production, but nevertheless, there might be some kinks 
 esp-nvs requires an implementation of the `Platform` trait to provide access to the flash as well as to the CRC32 present
 in the ESP32 ROM.
 
-Example implementation of the Platform driver for an ESP32. This requires new `low-level` feature of the `esp-storage` crate:
+Example implementation of the Platform driver for an ESP32. This requires the `embedded-storage` feature of the `esp-storage` crate:
 ```toml
 [dependencies]
-esp-storage = { version = "0.8.1", features = ["esp32c6"] }
+esp-storage = { version = "0.10.0", features = ["esp32c6", "embedded-storage"] }
 ```
 
 ```rust,ignore

@@ -87,8 +87,8 @@ jobs:
     # https://docs.github.com/en/actions/learn-github-actions/contexts#context-availability
     strategy:
       matrix:
-        # 2024 edition msrv is 1.85.0 but esp-hal requires 1.88.0
-        msrv: ["1.88.0"]
+        # 2024 edition msrv is 1.85.0 but the esp-rs 1.2 ecosystem requires 1.95.0
+        msrv: ["1.95.0"]
     name: ubuntu / ${{ matrix.msrv }}
     steps:
       - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # tag=v6.0.0

@@ -26,7 +26,7 @@
   languages.rust = {
     enable = true;
     channel = "stable";
-    version = "1.93.1";
+    version = "1.95.0";
     components = [
       "rustc"
       "rust-src"
